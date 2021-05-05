@@ -1,1 +1,1 @@
-# PROTEI-N
+# PROTEIωN
