@@ -1,0 +1,83 @@
+<h3 style="margin-bottom: 50px; text-align: center">Edit <b>{{protein.accession_number}}</b> protein</h3>
+<div class="container">
+  <form #createNewProteinForm="ngForm" (submit)="updateProtein(createNewProteinForm)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="accession_number"><b>Accession number</b><span class="required">*</span></label>
+        <input type="text" class="form-control mb-2" id="accession_number" name="accession_number" [(ngModel)]="protein.accession_number" maxlength="10"
+               required readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="seq_id"><b>Sequence ID</b><span class="required">*</span></label>
+        <input type="text" class="form-control mb-2" id="seq_id" name="seq_id" [(ngModel)]="protein.seq_id" maxlength="10"
+               required readonly>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="Prosite_ID"><b>Prosite ID</b><span class="required">*</span></label>
+        <input type="text" class="form-control mb-2" id="Prosite_ID" name="Prosite_ID" [(ngModel)]="protein.Prosite_ID" maxlength="10"
+               required readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="prev_acc_numbers"><b>Previous accession number</b></label>
+        <input type="text" class="form-control" id="prev_acc_numbers" name="prev_acc_numbers" [(ngModel)]="protein.prev_acc_numbers" maxlength="10" readonly>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="entry_name"><b>Entry name</b><span class="required">*</span></label>
+        <input type="text" class="form-control" id="entry_name" name="entry_name" [(ngModel)]="protein.entry_name" maxlength="20" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="full_name"><b>Full name</b><span class="required">*</span></label>
+        <input type="text" class="form-control" id="full_name" name="full_name" [(ngModel)]="protein.full_name" maxlength="100" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="short_name"><b>Short name</b></label>
+        <input type="text" class="form-control" id="short_name" name="short_name" [(ngModel)]="protein.short_name" maxlength="100">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="reviewed"><b>Reviewed</b></label>
+        <input type="checkbox" class="form-control" id="reviewed" name="reviewed" [checked]="protein.reviewed"  (change)="reviewedFunction($event)" >
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="integrated"><b>Integrated</b></label>
+        <input type="text" class="form-control" id="integrated" name="integrated" [(ngModel)]="protein.integrated" maxlength="60">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="first_date"><b>First date</b><span class="required">*</span></label>
+        <input type="date" class="form-control" id="first_date" name="first_date" [(ngModel)]="protein.first_date" required readonly>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="last_date"><b>Last date</b><span class="required">*</span></label>
+        <input type="date" class="form-control" id="last_date" name="last_date" [(ngModel)]="protein.last_date" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="pfunction"><b>Protein function</b></label>
+        <input type="text" class="form-control" id="pfunction" name="pfunction" [(ngModel)]="protein.pfunction" maxlength="1000">
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="related_organisms"><b>Related organisms</b></label>
+      <div *ngFor="let i of organisms">
+        <input type="checkbox" id="related_organisms" [checked]="i.isSelected" name="{{i.taxID}}" (change)="selectChangeHandler_orgs($event,i.taxID)" ng-checked="all">
+        {{i.taxID}}
+        <br>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="proteomes"><b>Proteomes</b></label>
+        <input type="text" class="form-control" id="proteomes" name="proteomes" [(ngModel)]="protein.proteomes" maxlength="40">
+      </div>
+    </div>
+    <button class="btn-lg" [disabled]="!createNewProteinForm.valid">Submit</button>
+  </form>
+</div>

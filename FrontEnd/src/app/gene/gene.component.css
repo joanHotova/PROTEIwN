@@ -1,0 +1,39 @@
+.table-striped{
+  border-bottom: 0;
+  background-color: white;
+}
+
+.search {
+  margin-bottom: 30px;
+}
+
+.button2{
+  border: none;
+  background-color: inherit;
+  color: #f79a2a;
+}
+.button1{
+  color: #005b55;
+}
+.to{
+  color: #005b55;
+}
+.pagination{
+  color: #005b55;
+}
+.pagination /deep/ .ngx-pagination .current {
+  background: #f79a2a;
+}
+.btn-lg{
+  background-color: #f79a2a;
+  border-color: #f79a2a;
+  border-radius: 30px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  font-size: 15px;
+}
+.btn-lg:hover{
+  background-color: #005b55;
+  border-color: #005b55;
+}

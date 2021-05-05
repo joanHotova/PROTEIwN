@@ -1,0 +1,38 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+<input *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="btn btn-info btn-lg" type="button" onclick="window.location.href='http://localhost:4200/add-sequence';" value="+ Add sequence" />
+<div class = "container">
+  <div class = "card">
+    <div class = "card-body">
+      <h3 class = "text-center"><b>Sequences</b></h3>
+      <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search...">
+      </div>
+      <table class = "table table-hover">
+        <thead class="thead-dark">
+        <th *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"> </th>
+        <th> Sequence ID </th>
+        <th> Length </th>
+        <th> Mass </th>
+        <th> Last date </th>
+        <th> CheckSum </th>
+        <th> Sequence </th>
+        </thead>
+        <tbody>
+        <tr *ngFor = "let  sequence of sequences | filter:searchText | paginate: {itemsPerPage:5, currentPage:p};">
+          <td *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"><div class="btn-group">
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="button button1" routerLink="/sequences/edit/{{sequence.seq_id}}"><i class="fa fa-pencil fa-2x link-icon"></i></a>
+            <button *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" mwlConfirmationPopover [popoverMessage]="popoverMessage" placement="right" (confirm)="deleteSequence(sequence.seq_id);" (cancel)="cancelClicked= true" class="button button2" type="button"><i class="fa fa-trash fa-2x link-icon"></i></button></div></td>
+          <td>{{sequence.seq_id}}</td>
+          <td>{{sequence.length}}</td>
+          <td>{{sequence.mass}}</td>
+          <td>{{sequence.last_date}}</td>
+          <td>{{sequence.checksum}}</td>
+          <td class="word-break">{{sequence.sequence}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+    </div>
+  </div>
+</div>
+

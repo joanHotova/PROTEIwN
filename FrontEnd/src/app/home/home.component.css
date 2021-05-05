@@ -1,0 +1,33 @@
+.welcome{
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: #262b37;
+}
+
+.search {
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin:auto;
+  border-color: #005b55;
+  alignment: center;
+}
+
+.large-table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.card{
+  margin: 80px;
+  border-color: #767979;
+}
+.to{
+  color: #005b55;
+}
+.pagination{
+  color: #005b55;
+}
+.pagination /deep/ .ngx-pagination .current {
+  background: #f79a2a;
+}

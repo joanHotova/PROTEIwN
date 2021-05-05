@@ -1,0 +1,156 @@
+<div class="welcome">
+  <h5 style="text-align: center"><b>In the search bar below, you can search anything you need and all the related tables will be displayed.</b></h5>
+</div>
+
+<div class = "search">
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchTextFromHome" (ngModelChange)="onSearchTextChange($event)" autocomplete="off" placeholder="Search...">
+</div>
+
+<div class = "card" *ngIf="proteinsFiltered?.length > 0">
+  <div class = "card-body">
+    <h3 class = "text-center"><b>Proteins</b></h3>
+    <table  class = "table table-hover large-table" >
+      <thead class="thead-dark">
+      <th> Accession number </th>
+      <th> Sequence ID </th>
+      <th> Prosite ID </th>
+      <th> Previous accession number </th>
+      <th> Entry name </th>
+      <th> Full name </th>
+      <th> Short name </th>
+      <th> Reviewed </th>
+      <th> Integrated </th>
+      <th> First date </th>
+      <th> Last date </th>
+      <th> Proteomes </th>
+      <th> Protein function </th>
+      <th> Related Organisms </th>
+      </thead>
+
+      <tbody>
+      <tr *ngFor = "let  i of proteinsFiltered| paginate: {itemsPerPage:5, currentPage:p};">
+        <td>{{i.accession_number}}</td>
+        <td> <a class="to" [title]="i.seq_id + ' details'" [routerLink]="['/sequences', i.seq_id]">{{i.seq_id}}</a></td>
+        <td> <a class="to" [title]="i.Prosite_ID + ' details'" [routerLink]="['/protein_classifications', i.Prosite_ID]">{{i.Prosite_ID}}</a></td>
+        <td>{{i.prev_acc_numbers}}</td>
+        <td>{{i.entry_name}}</td>
+        <td>{{i.full_name}}</td>
+        <td>{{i.short_name}}</td>
+        <td>{{i.reviewed}}</td>
+        <td>{{i.integrated}}</td>
+        <td>{{i.first_date}}</td>
+        <td>{{i.last_date}}</td>
+        <td>{{i.proteomes}}</td>
+        <td>{{i.pfunction}}</td>
+        <div *ngFor="let item of i.setOrganisms">
+          <td>{{item.taxID}}</td>
+        </div>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+</div>
+
+<div class = "card"  *ngIf="sequencesFiltered?.length > 0">
+  <div class = "card-body">
+    <h3 class = "text-center"><b>Sequences</b></h3>
+    <table  class = "table table-hover large-table" >
+      <thead class="thead-dark">
+      <th> Sequence ID </th>
+      <th> Length </th>
+      <th> Mass </th>
+      <th> Last date </th>
+      <th> CheckSum </th>
+      <th> Sequence </th>
+      </thead>
+
+      <tbody>
+      <tr *ngFor = "let  i of sequencesFiltered| paginate: {itemsPerPage:5, currentPage:p};">
+        <td>{{i.seq_id}}</td>
+        <td>{{i.length}}</td>
+        <td>{{i.mass}}</td>
+        <td>{{i.last_date}}</td>
+        <td>{{i.checksum}}</td>
+        <td class="word-break">{{i.sequence}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+</div>
+
+<div class = "card"  *ngIf="organismsFiltered?.length > 0">
+  <div class = "card-body">
+    <h3 class = "text-center"><b>Organisms</b></h3>
+    <table  class = "table table-hover" >
+      <thead class="thead-dark">
+      <th> Taxonomy ID</th>
+      <th> Scientific name</th>
+      <th> Mnemonic</th>
+      <th> Taxonomy navigation</th>
+      <th> Related Proteins </th>
+      </thead>
+      <tbody>
+      <tr *ngFor = "let  i of organismsFiltered| paginate: {itemsPerPage:5, currentPage:p}; ">
+        <td>{{i.taxID}}</td>
+        <td>{{i.scientific_name}}</td>
+        <td>{{i.mnemonic}}</td>
+        <td>{{i.taxonomy_navigation}}</td>
+        <div *ngFor="let item of i.setProteins">
+          <td>{{item.accession_number}}</td>
+        </div>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+</div>
+
+<div class = "card" *ngIf="genesFiltered?.length > 0">
+  <div class = "card-body" >
+    <h3 class = "text-center"><b>Genes</b></h3>
+    <table  class = "table table-hover">
+      <thead class="thead-dark">
+      <th> Gene name </th>
+      <th> Taxonomy ID </th>
+      <th> Accession number </th>
+      <th> ORF name </th>
+      <th> Synonym </th>
+      </thead>
+
+      <tbody>
+      <tr *ngFor = "let  i of genesFiltered| paginate: {itemsPerPage:5, currentPage:p};">
+        <td>{{i.gene_name}}</td>
+        <td> <a class="to" [title]="i.taxID + ' details'" [routerLink]="['/organisms', i.taxID]">{{i.taxID}}</a></td>
+        <td> <a class="to" [title]="i.accession_number + ' details'" [routerLink]="['/proteins', i.accession_number]">{{i.accession_number}}</a></td>
+        <td>{{i.orf_name}}</td>
+        <td>{{i.synonym}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+</div>
+
+<div class = "card" *ngIf="proteinClassificationFiltered?.length > 0">
+  <div class = "card-body" >
+    <h3 class = "text-center"><b>Protein classifications</b></h3>
+    <table  class = "table table-hover" >
+      <thead class="thead-dark">
+      <th> Prosite ID</th>
+      <th> Family</th>
+      <th> Subfamily</th>
+      </thead>
+
+      <tbody>
+      <tr *ngFor = "let  i of proteinClassificationFiltered| paginate: {itemsPerPage:5, currentPage:p}; ">
+        <td>{{i.prosite_ID}}</td>
+        <td>{{i.family}}</td>
+        <td>{{i.subfamily}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+</div>

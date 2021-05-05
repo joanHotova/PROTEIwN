@@ -1,0 +1,40 @@
+.btn{
+  color: white;
+  background-color: #005b55;
+  border-color: #005b55;
+  width: 100px;
+  height: 50px;
+  border-radius: 30px;
+}
+.btn:hover {
+  background-color: #f79a2a;
+  border-color: #f79a2a;
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 5px 0px 10px;
+  display: inline-block;
+  border: 1px solid #005b55;
+  box-sizing: border-box;
+}
+label{
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.container {
+  padding: 16px;
+  width: 400px;
+}

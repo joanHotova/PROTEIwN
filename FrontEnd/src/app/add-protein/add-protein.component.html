@@ -1,0 +1,94 @@
+<h3 style="margin-bottom: 50px; text-align: center">Add protein</h3>
+<div class="container">
+  <form #createNewProteinForm="ngForm" (submit)="createProtein(createNewProteinForm)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="accession_number"><b>Accession number</b><span class="required">*</span></label>
+        <input type="text" class="form-control mb-2" id="accession_number" name="accession_number" maxlength="10"
+               required ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="seq_id"><b>Sequence ID</b><span class="required">*</span></label>
+        <select id="seq_id" class="form-control" (change)="selectChangeHandler_seq($event)" required ngModel>
+          <option *ngFor="let i of sequences">
+            {{i.seq_id}}
+          </option>
+        </select>
+        <p><span>You selected: </span><b>{{selection_seq}}</b></p>
+      </div>
+    </div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="Prosite_ID"><b>Prosite ID</b><span class="required">*</span></label>
+    <select id="Prosite_ID" class="form-control" (change)="selectChangeHandler_pros($event)" required ngModel>
+      <option *ngFor="let i of proteinclassifications">
+        {{i.prosite_ID}}
+      </option>
+    </select>
+    <p><span>You selected: </span><b>{{selection_pros}}</b></p>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="prev_acc_numbers"><b>Previous accession number</b></label>
+    <input type="text" class="form-control" id="prev_acc_numbers" name="prev_acc_numbers" maxlength="10" ngModel>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="entry_name"><b>Entry name</b><span class="required">*</span></label>
+    <input type="text" class="form-control" id="entry_name" name="entry_name" maxlength="20" required ngModel>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="full_name"><b>Full name</b><span class="required">*</span></label>
+    <input type="text" class="form-control" id="full_name" name="full_name" maxlength="100" required ngModel>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="short_name"><b>Short name</b></label>
+    <input type="text" class="form-control" id="short_name" name="short_name" maxlength="100" ngModel>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="reviewed"><b>Reviewed</b></label>
+    <input type="checkbox" class="form-control" id="reviewed" name="reviewed" value="true" ngModel>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="integrated"><b>Integrated</b></label>
+    <input type="text" class="form-control" id="integrated" name="integrated" maxlength="60" ngModel>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="first_date"><b>First date</b><span class="required">*</span></label>
+    <input type="date" class="form-control" id="first_date" name="first_date" required ngModel>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="last_date"><b>Last date</b><span class="required">*</span></label>
+    <input type="date" class="form-control" id="last_date" name="last_date" required ngModel>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="pfunction"><b>Protein function</b></label>
+    <input type="text" class="form-control" id="pfunction" name="pfunction" maxlength="1000" ngModel>
+  </div>
+</div>
+<div class="form-group col-md-6">
+  <label for="related_organisms"><b>Related organisms</b></label>
+  <div *ngFor="let i of organisms">
+    <input type="checkbox" id="related_organisms" name="{{i.taxID}}" (change)="selectChangeHandler_orgs($event,i.taxID)" ng-checked="all">
+    {{i.taxID}}
+    <br>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="proteomes"><b>Proteomes</b></label>
+    <input type="text" class="form-control" id="proteomes" name="proteomes" maxlength="40" ngModel>
+  </div>
+</div>
+<p aria-hidden="true" id="required-description">
+  <span class="required">*</span><i>Required field</i>
+</p>
+<button class="btn-lg" [disabled]="!createNewProteinForm.valid">Submit</button>
+</form>
+</div>

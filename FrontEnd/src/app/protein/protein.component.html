@@ -1,0 +1,56 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+<a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="btn btn-info btn-lg" routerLink="/add-protein">+ Add protein</a>
+<div class = "container">
+  <div class = "card">
+    <div class = "card-body">
+      <h3 class = "text-center"><b>Proteins</b></h3>
+      <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search...">
+      </div>
+      <table  class = "table table-hover">
+        <thead class="thead-dark">
+        <th *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"> </th>
+        <th> Accession number </th>
+        <th> Sequence ID </th>
+        <th> Prosite ID </th>
+        <th> Previous accession number </th>
+        <th> Entry name </th>
+        <th> Full name </th>
+        <th> Short name </th>
+        <th> Reviewed </th>
+        <th> Integrated </th>
+        <th> First date </th>
+        <th> Last date </th>
+        <th> Proteomes </th>
+        <th> Protein function </th>
+        <th> Related Organisms </th>
+        </thead>
+        <tbody>
+        <tr *ngFor = "let  protein of proteins | filter:searchText | paginate: {itemsPerPage:5, currentPage:p};">
+          <td *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="selected">
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="button button1" routerLink="/proteins/edit/{{protein.accession_number}}"><i class="fa fa-pencil fa-2x link-icon"></i></a>
+            <button *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right" (confirm)="deleteProtein(protein.accession_number);" (cancel)="cancelClicked= true" class="button button2"><i class="fa fa-trash fa-2x link-icon"></i></button></td>
+          <td>{{protein.accession_number}}</td>
+          <td><a class="to" [title]="protein.seq_id + ' details'" [routerLink]="['/sequences', protein.seq_id]">{{protein.seq_id}}</a></td>
+          <td><a class="to" [title]="protein.Prosite_ID + ' details'" [routerLink]="['/protein_classifications', protein.Prosite_ID]">{{protein.Prosite_ID}}</a></td>
+          <td>{{protein.prev_acc_numbers}}</td>
+          <td>{{protein.entry_name}}</td>
+          <td>{{protein.full_name}}</td>
+          <td>{{protein.short_name}}</td>
+          <td>{{protein.reviewed}}</td>
+          <td>{{protein.integrated}}</td>
+          <td>{{protein.first_date}}</td>
+          <td>{{protein.last_date}}</td>
+          <td>{{protein.proteomes}}</td>
+          <td>{{protein.pfunction}}</td>
+          <div *ngFor="let item of protein.setOrganisms">
+            <td>{{item.taxID}}</td>
+          </div>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="pagination" (pageChange)="p = $event"  previousLabel="" nextLabel=""></pagination-controls>
+    </div>
+  </div>
+</div>
+

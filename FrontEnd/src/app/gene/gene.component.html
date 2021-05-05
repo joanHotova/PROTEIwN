@@ -1,0 +1,36 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+<input *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="btn btn-info btn-lg" type="button" onclick="window.location.href='http://localhost:4200/add-gene';" value="+ Add gene" />
+<div class = "container">
+  <div class = "card">
+    <div class = "card-body" >
+      <h3 class = "text-center"><b>Genes</b></h3>
+      <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search...">
+      </div>
+      <table class = "table table-hover" >
+        <thead class="thead-dark">
+        <th *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"> </th >
+        <th> Gene name </th>
+        <th> Taxonomy ID </th>
+        <th> Accession number </th>
+        <th> ORF name </th>
+        <th> Synonym </th>
+        </thead>
+        <tbody>
+        <tr *ngFor = "let gene of genes | filter:searchText | paginate: {itemsPerPage:5, currentPage:p};">
+          <td *ngIf="hardcodedAuthenticationService.isUserLoggedIn()">
+            <div class="btn-group">
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="button button1" routerLink="/genes/edit/{{gene.gene_name}}"><i class="fa fa-pencil fa-2x link-icon"></i></a>
+            <button *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right" (confirm)="deleteGene(gene.gene_name);" (cancel)="cancelClicked= true" class="button button2" type="button"><i class="fa fa-trash fa-2x link-icon"></i></button></div></td>
+          <td>{{gene.gene_name}}</td>
+          <td><a class="to" [title]="gene.taxID + ' details'" [routerLink]="['/organisms', gene.taxID]">{{gene.taxID}}</a></td>
+          <td><a class="to" [title]="gene.accession_number + ' details'" [routerLink]="['/proteins', gene.accession_number]">{{gene.accession_number}}</a></td>
+          <td>{{gene.orf_name}}</td>
+          <td>{{gene.synonym}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<h3 style="margin-bottom: 50px; text-align: center">Edit <b>{{activatedRoute.snapshot.params.prosite_ID}}</b> protein classification</h3>
+<div class="container">
+  <form [formGroup]="editForm" (ngSubmit)="updateProteinClassification()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="prosite_ID"><b>Prosite ID</b></label>
+        <input type="text" class="form-control" id="prosite_ID" formControlName="prosite_ID" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="family"><b>Family</b></label>
+        <input type="text" class="form-control" id="family" formControlName="family" maxlength="50">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="subfamily"><b>Subfamily</b></label>
+        <input type="text" class="form-control" id="subfamily" formControlName="subfamily" maxlength="30">
+      </div>
+    </div>
+    <button type="submit" class="btn-lg">Submit</button>
+  </form>
+</div>

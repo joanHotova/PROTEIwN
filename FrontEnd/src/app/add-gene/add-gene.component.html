@@ -1,0 +1,43 @@
+<h3 style="margin-bottom: 50px; text-align: center">Add gene</h3>
+<div class="container">
+  <form #createNewGeneForm="ngForm" (submit)="createGene(createNewGeneForm)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="gene_name"><b>Gene name</b><span class="required">*</span></label>
+        <input type="text" class="form-control mb-2" id="gene_name" name="gene_name" maxlength="40" required ngModel>
+      </div>
+      <div class="form-group col-md-6" >
+        <label for="taxID">Taxonomy ID<span class="required">*</span></label>
+        <select id="taxID" class="form-control" (change)="selectChangeHandler_org($event)" required ngModel>
+          <option *ngFor="let i of organisms">
+            {{i.taxID}}
+          </option>
+        </select>
+        <p><span>You selected: </span><b>{{selection_org}}</b></p>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="accession_number">Accession number<span class="required">*</span></label>
+        <select  id="accession_number" class="form-control" (change)="selectChangeHandler_prot($event)" required ngModel>
+          <option *ngFor="let i of proteins">
+            {{i.accession_number}}
+          </option>
+        </select>
+        <p><span>You selected: </span><b>{{selection_prot}}</b></p>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="orf_name"><b>ORF name</b></label>
+        <input type="text" class="form-control" id="orf_name" name="orf_name" maxlength="40" ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="synonym"><b>Synonym</b></label>
+        <input type="text" class="form-control" id="synonym" name="synonym" maxlength="40" ngModel>
+      </div>
+    </div>
+    <p aria-hidden="true" id="required-description">
+      <span class="required">*</span><i>Required field</i>
+    </p>
+    <button class="btn-lg" [disabled]="!createNewGeneForm.valid">Submit</button>
+  </form>
+</div>

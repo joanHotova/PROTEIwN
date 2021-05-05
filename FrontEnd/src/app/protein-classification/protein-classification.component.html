@@ -1,0 +1,31 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+<input *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="btn btn-info btn-lg" type="button" onclick="window.location.href='http://localhost:4200/add-protein-classification';" value="+ Add protein classification" />
+<div class = "container">
+  <div class = "card">
+    <div class = "card-body">
+      <h3 class = "text-center"><b>Protein classifications</b></h3>
+      <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search...">
+      </div>
+      <table class = "table table-hover">
+        <thead class="thead-dark">
+        <th *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"> </th>
+        <th> Prosite ID</th>
+        <th> Family</th>
+        <th> Subfamily</th>
+        </thead>
+        <tbody>
+        <tr *ngFor = "let  proteinclassification of proteinclassifications | filter:searchText | paginate: {itemsPerPage:5, currentPage:p};">
+          <td *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"><div class="btn-group">
+            <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="button button1" routerLink="/protein-classifications/edit/{{proteinclassification.prosite_ID}}"><i class="fa fa-pencil fa-2x link-icon"></i></a>
+            <button *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" mwlConfirmationPopover [popoverMessage]="popoverMessage" placement="right" (confirm)="deleteProteinClassification(proteinclassification.prosite_ID);" (cancel)="cancelclicked= true" class="button button2" type="button"><i class="fa fa-trash fa-2x link-icon"></i></button></div></td>
+          <td>{{proteinclassification.prosite_ID}}</td>
+          <td>{{proteinclassification.family}}</td>
+          <td>{{proteinclassification.subfamily}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+    </div>
+  </div>
+</div>

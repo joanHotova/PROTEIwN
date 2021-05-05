@@ -1,0 +1,38 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+<input *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="btn btn-info btn-lg" type="button" onclick="window.location.href='http://localhost:4200/add-organism';" value="+ Add organism" />
+<div class = "container">
+  <div class = "card">
+    <div class = "card-body" >
+      <h3 class = "text-center"><b>Organisms</b></h3>
+      <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search...">
+      </div>
+      <table class = "table table-hover">
+        <thead class="thead-dark">
+        <th *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"> </th>
+        <th> Taxonomy ID</th>
+          <th> Scientific name</th>
+          <th> Mnemonic</th>
+          <th> Taxonomy navigation</th>
+          <th> Related Proteins </th>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let  organism of organisms | filter:searchText | paginate: {itemsPerPage:5, currentPage:p};">
+            <td *ngIf="hardcodedAuthenticationService.isUserLoggedIn()"><div class="btn-group">
+              <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" class="button button1" routerLink="/organisms/edit/{{organism.taxID}}"><i class="fa fa-pencil fa-2x link-icon"></i></a>
+              <button *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right" (confirm)="deleteOrganism(organism.taxID);" (cancel)="cancelClicked= true" class="button button2"><i class="fa fa-trash fa-2x link-icon"></i></button></div></td>
+            <td>{{organism.taxID}}</td>
+            <td>{{organism.scientific_name}}</td>
+            <td>{{organism.mnemonic}}</td>
+            <td>{{organism.taxonomy_navigation}}</td>
+            <div *ngFor="let item of organism.setProteins">
+              <td>{{item.accession_number}}</td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+    </div>
+  </div>
+</div>
+

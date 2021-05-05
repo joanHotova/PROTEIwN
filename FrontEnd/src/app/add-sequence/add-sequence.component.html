@@ -1,0 +1,39 @@
+<h3 style="margin-bottom: 50px; text-align: center">Add sequence</h3>
+<div class = "container">
+  <form #createNewSequenceForm="ngForm" (submit)="createSequence(createNewSequenceForm)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="seq_id"><b>Sequence ID</b><span class="required">*</span></label>
+        <input type="text" class="form-control mb-2" id="seq_id" name="seq_id" maxlength="10" required ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="length"><b>Length</b><span class="required">*</span></label>
+        <input type="number" class="form-control" id="length" name="length" required ngModel>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mass"><b>Mass</b><span class="required">*</span></label>
+        <input type="number" class="form-control" id="mass" name="mass" required ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="last_date"><b>Last date</b><span class="required">*</span></label>
+        <input type="date" class="form-control" id="last_date" name="last_date" required ngModel>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="checksum"><b>CheckSum</b><span class="required">*</span></label>
+        <input type="text" class="form-control" id="checksum" name="checksum" maxlength="30" required ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="sequence"><b>Sequence</b><span class="required">*</span></label>
+        <textarea type="text" style="height: 150px" class="form-control" id="sequence" name="sequence" maxlength="10000" required ngModel></textarea>
+      </div>
+    </div>
+    <p aria-hidden="true" id="required-description">
+      <span class="required">*</span><i>Required field</i>
+    </p>
+    <button class="btn-lg" [disabled]="!createNewSequenceForm.valid">Submit</button>
+  </form>
+</div>

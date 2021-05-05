@@ -1,0 +1,25 @@
+.header img{
+  display: block;
+  float: left;
+  width: 100px;
+  height: 90px;
+  max-width: 100%;
+  max-height: 70%;
+  margin-right: 70px;
+  margin-left: 20px;
+  zoom: 130%;
+}
+
+.nav-link{
+  color: white;
+  padding: 20px;
+}
+
+.nav-link:hover{
+  color: lightgray;
+}
+
+.navbar{
+  color: black;
+  height: 90px;
+}

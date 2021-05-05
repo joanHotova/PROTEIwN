@@ -1,0 +1,30 @@
+<h3 style="margin-bottom: 50px; text-align: center">Edit <b>{{activatedRoute.snapshot.params.gene_name}}</b> gene</h3>
+<div class="container">
+  <form [formGroup]="editForm" (ngSubmit)="updateGene()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="gene_name"><b>Gene name</b></label>
+        <input type="text" class="form-control" id="gene_name" formControlName="gene_name" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="taxID"><b>Taxonomy ID</b></label>
+        <input type="number" class="form-control" id="taxID" formControlName="taxID" readonly>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="accession_number"><b>Accession number</b></label>
+        <input type="text" class="form-control" id="accession_number" formControlName="accession_number" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="orf_name"><b>ORF name</b></label>
+        <input type="text" class="form-control" id="orf_name" formControlName="orf_name" maxlength="40">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="synonym"><b>Synonym</b></label>
+        <input type="text" class="form-control" id="synonym" formControlName="synonym" maxlength="40">
+      </div>
+    </div>
+    <button type="submit" class="btn-lg">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+<h3 style="margin-bottom: 50px; text-align: center">Edit <b>{{organism.taxID}}</b> organism</h3>
+<div class = "container">
+  <form #createNewOrganismForm="ngForm" (submit)="updateOrganism(createNewOrganismForm)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="taxID"><b>Taxonomy ID</b><span class="required">*</span></label>
+        <input type="number" value="{{organism.taxID}}" class="form-control mb-2" id="taxID" name="taxID" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="scientific_name"><b>Scientific name</b></label>
+        <input type="text" [(ngModel)]="organism.scientific_name" class="form-control" id="scientific_name" name="scientific_name" maxlength="60"><br><br>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mnemonic"><b>Mnemonic</b></label>
+        <input type="text" [(ngModel)]="organism.mnemonic" class="form-control" id="mnemonic" name="mnemonic" maxlength="60">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="taxonomy_navigation"><b>Taxonony navigation</b></label>
+        <input type="text" [(ngModel)]="organism.taxonomy_navigation" class="form-control" id="taxonomy_navigation" name="taxonomy_navigation" maxlength="10000">
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="related_proteins">Related proteins</label>
+      <div *ngFor="let i of proteins">
+        <input type="checkbox" id="related_proteins" [checked]="i.isSelected" name="{{i.accession_number}}" (change)="selectChangeHandler_prot($event,i.accession_number)"  ng-checked="all"> {{i.accession_number}}
+        <br>
+      </div>
+    </div>
+    <button class="btn-lg" [disabled]="!createNewOrganismForm.valid">Submit</button>
+  </form>
+</div>

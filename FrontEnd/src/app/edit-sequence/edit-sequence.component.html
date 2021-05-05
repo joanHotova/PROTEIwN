@@ -1,0 +1,34 @@
+<h3 style="margin-bottom: 50px; text-align: center">Edit <b>{{activatedRoute.snapshot.params.seq_id}}</b> sequence</h3>
+<div class="container">
+  <form [formGroup]="editForm" (ngSubmit)="updateSequence()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="seq_id"><b>Sequence ID</b></label>
+        <input type="text" class="form-control" id="seq_id" formControlName="seq_id" readonly>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="length"><b>Length</b></label>
+        <input type="number" class="form-control" id="length" formControlName="length">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mass"><b>Mass</b></label>
+        <input type="number" class="form-control" id="mass" formControlName="mass">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="last_date"><b>Last date</b></label>
+        <input type="date" class="form-control" id="last_date" formControlName="last_date">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="checksum"><b>CheckSum</b></label>
+        <input type="text" class="form-control" id="checksum" formControlName="checksum" maxlength="30">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="sequence"><b>Sequence</b></label>
+        <textarea style="height: 150px" type="text" class="form-control" id="sequence" formControlName="sequence" maxlength="10000"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn-lg">Submit</button>
+  </form>
+</div>
